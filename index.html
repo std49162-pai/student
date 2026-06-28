@@ -343,4 +343,260 @@
             </button>
             <div class="space-y-6">
                 <div class="flex items-center gap-4 border-b pb-4 dark:border-gray-700">
-                    <div class="w
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 id="modal-title" class="text-xl font-bold text-gray-900 dark:text-gray-100">ชื่อสาขาวิชา</h3>
+                        <p id="modal-faculty" class="text-xs text-blue-600 dark:text-blue-400 font-medium mt-0.5">กลุ่มคณะวิชา</p>
+                    </div>
+                </div>
+                <div class="space-y-4 text-sm leading-relaxed">
+                    <div>
+                        <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-1"><i class="fa-solid fa-circle-info mr-1.5 text-blue-500"></i> รายละเอียดหลักสูตรเบื้องต้น</h4>
+                        <p id="modal-desc" class="text-gray-600 dark:text-gray-400"></p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="p-3 bg-gray-50 dark:bg-gray-700/40 rounded-xl border border-gray-100 dark:border-gray-700">
+                            <span class="text-xs text-gray-400 block mb-0.5">ระยะเวลาเรียน</span>
+                            <span id="modal-duration" class="font-semibold text-gray-800 dark:text-gray-200">4 ปีการศึกษา</span>
+                        </div>
+                        <div class="p-3 bg-gray-50 dark:bg-gray-700/40 rounded-xl border border-gray-100 dark:border-gray-700">
+                            <span class="text-xs text-gray-400 block mb-0.5">โอกาสได้งานหลังเรียนจบ</span>
+                            <span id="modal-job-rate" class="font-semibold text-green-600 dark:text-green-400">สูงมาก (95%+)</span>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-1"><i class="fa-solid fa-briefcase mr-1.5 text-indigo-500"></i> แนวทางการประกอบอาชีพ</h4>
+                        <p id="modal-careers" class="text-gray-600 dark:text-gray-400 text-xs sm:text-sm"></p>
+                    </div>
+                </div>
+                <div class="pt-4 border-t dark:border-gray-700">
+                    <button onclick="closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold p-3 rounded-xl transition">ปิดหน้าต่างนี้</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 12.1 DARK MODE SYSTEM ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.className = 'fa-solid fa-sun text-lg text-yellow-400';
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.className = 'fa-solid fa-moon text-lg';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon text-lg';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun text-lg text-yellow-400';
+            }
+        });
+
+        // --- 12.2 LIST OF 80+ MAJORS ---
+        const fields = [
+            "วิศวกรรมคอมพิวเตอร์", "วิศวกรรมไฟฟ้า", "วิศวกรรมโยธา", "วิศวกรรมเครื่องกล", "วิศวกรรมเคมี", "วิศวกรรมอุตสาหการ", "วิศวกรรมการบิน", "วิศวกรรมสิ่งแวดล้อม",
+            "แพทยศาสตร์", "ทันตแพทยศาสตร์", "เภสัชศาสตร์", "สัตวแพทยศาสตร์", "พยาบาลศาสตร์", "เทคนิคการแพทย์", "สาธารณสุขศาสตร์", "กายภาพบำบัด",
+            "วิทยาการคอมพิวเตอร์", "เทคโนโลยีสารสนเทศ", "วิทยาศาสตร์ข้อมูล", "เคมี", "ฟิสิกส์", "ชีววิทยา", "คณิตศาสตร์", "สถิติ",
+            "บริหารธุรกิจ", "การบัญชี", "การตลาด", "การเงิน", "การจัดการโลจิสติกส์", "ธุรกิจระหว่างประเทศ", "การท่องเที่ยวและการโรงแรม", "ผู้ประกอบการ",
+            "นิติศาสตร์", "รัฐศาสตร์", "ความสัมพันธ์ระหว่างประเทศ", "สังคมวิทยา", "จิตวิทยา", "ประวัติศาสตร์", "ปรัชญา", "ภูมิศาสตร์",
+            "นิเทศศาสตร์", "วารสารศาสตร์", "การประชาสัมพันธ์", "ภาพยนตร์และสื่อดิจิทัล", "การสร้างสรรค์คอนเทนต์", "โฆษณา", "มัลติมีเดีย", "วิทยุกระจายเสียง",
+            "อักษรศาสตร์", "ศิลปศาสตร์", "มนุษยศาสตร์", "ภาษาอังกฤษ", "ภาษาจีน", "ภาษาญี่ปุ่น", "ภาษาเกาหลี", "ภาษาฝรั่งเศส",
+            "สถาปัตยกรรมศาสตร์", "การออกแบบภายใน", "ภูมิสถาปัตยกรรม", "ผังเมือง", "การออกแบบอุตสาหกรรม", "ศิลปะประยุกต์", "นวัตกรรมการออกแบบ", "สถาปัตยกรรมไทย",
+            "ครุศาสตร์", "ศึกษาศาสตร์", "การประถมศึกษา", "การศึกษาปฐมวัย", "พลศึกษา", "จิตวิทยาการแนะแนว", "เทคโนโลยีการศึกษา", "การสอนภาษาอังกฤษ",
+            "เศรษฐศาสตร์", "เศรษฐศาสตร์ระหว่างประเทศ", "เศรษฐศาสตร์การเงิน", "เกษตรศาสตร์", "สัตบาล", "วิทยาศาสตร์การอาหาร", "วนศาสตร์", "ประมง"
+        ];
+
+        // --- 12.3 EXTENDED DETAILS FOR MODAL ---
+        const facultyDetails = {
+            "วิศวกรรม": {
+                desc: "เน้นการนำความรู้ทางคณิตศาสตร์และวิทยาศาสตร์มาประยุกต์ใช้ในการคิดค้น ออกแบบ บำรุงรักษา และสร้างสรรค์สิ่งประดิษฐ์ โครงสร้าง หรือระบบเทคโนโลยีต่างๆ",
+                careers: "วิศวกรประจำโรงงานหรือหน่วยงานรัฐ-เอกชน, ที่ปรึกษาด้านเทคนิค, ผู้บริหารโครงการ",
+                facultyName: "คณะวิศวกรรมศาสตร์"
+            },
+            "แพทย์": {
+                desc: "เรียนรู้เกี่ยวกับโครงสร้างร่างกายมนุษย์ การวินิจฉัยโรค การรักษา อาการป่วย ตลอดจนการป้องกันและการส่งเสริมสุขภาพอนามัยของประชาชน",
+                careers: "แพทย์ทั่วไป, แพทย์เฉพาะทาง, นักวิจัยทางการแพทย์, ที่ปรึกษาด้านสุขภาพ",
+                facultyName: "คณะแพทยศาสตร์ / วิทยาศาสตร์สุขภาพ"
+            },
+            "วิทยา": {
+                desc: "ศึกษาลึกซึ้งเกี่ยวกับกฎเกณฑ์ ปรากฏการณ์ธรรมชาติ และวิทยาการคำนวณผ่านกระบวนการทดลองเพื่อสร้างองค์ความรู้และเทคโนโลยีชั้นสูง",
+                careers: "นักวิทยาศาสตร์, นักวิจัยและพัฒนา (R&D), นักวิเคราะห์ข้อมูล, อาจารย์มหาวิทยาลัย",
+                facultyName: "คณะวิทยาศาสตร์และเทคโนโลยี"
+            },
+            "บริหาร": {
+                desc: "มุ่งเน้นทักษะการวางแผน การจัดการองค์กร การวิเคราะห์การตลาด เม็ดเงิน การขนส่ง และกลยุทธ์การดำเนินธุรกิจทั้งในและระหว่างประเทศ",
+                careers: "นักการตลาด, นักวิเคราะห์การเงิน, ผู้บริหารองค์กร, เจ้าของธุรกิจสตาร์ทอัพ",
+                facultyName: "คณะบริหารธุรกิจ / พาณิชยศาสตร์และการบัญชี"
+            },
+            "นิเทศ": {
+                desc: "ศาสตร์แห่งการสื่อสารมวลชน เรียนรู้การผลิตสื่อ การสร้างสรรค์คอนเทนต์ วารสารศาสตร์ ภาพยนตร์ และการประชาสัมพันธ์ในยุคดิจิทัล",
+                careers: "คอนเทนต์ครีเอเตอร์, ผู้กำกับภาพยนตร์, นักประชาสัมพันธ์, นักข่าว",
+                facultyName: "คณะนิเทศศาสตร์ / สื่อสารมวลชน"
+            },
+            "ภาษา": {
+                desc: "ศึกษาโครงสร้างภาษา วรรณกรรม และวัฒนธรรม มุ่งเน้นการฟัง พูด อ่าน เขียน เพื่อนำไปใช้ติดต่อสื่อสารและทำงานในระดับสากล",
+                careers: "ล่าม, นักแปล, แอร์โฮสเตส, เจ้าหน้าที่วิเทศสัมพันธ์, พนักงานบริษัทข้ามชาติ",
+                facultyName: "คณะอักษรศาสตร์ / ศิลปศาสตร์ / มนุษยศาสตร์"
+            },
+            "สังคม": {
+                desc: "เน้นศึกษาโครงสร้างทางสังคม กฎหมาย การเมืองการปกครอง ความสัมพันธ์ระหว่างประเทศ และพฤติกรรมของมนุษย์เพื่อจัดระเบียบสังคม",
+                careers: "นักกฎหมาย, ทนายความ, ผู้พิพากษา, นักการทูต, ข้าราชการฝ่ายปกครอง",
+                facultyName: "คณะนิติศาสตร์ / รัฐศาสตร์ / สังคมศาสตร์"
+            },
+            "สถาปัตย์": {
+                desc: "การผสมผสานศาสตร์เชิงวิศวกรรมเข้ากับศิลปะเพื่อออกแบบอาคาร สิ่งก่อสร้าง พื้นที่ใช้สอยภายในภายนอก และผังเมือง",
+                careers: "สถาปนิก, นักออกแบบภายใน, นักผังเมือง, ผู้ควบคุมงานก่อสร้าง",
+                facultyName: "คณะสถาปัตยกรรมศาสตร์"
+            },
+            "ครู": {
+                desc: "เรียนรู้วิธีการถ่ายทอดความรู้ จิตวิทยาเด็ก เทคนิคการสอนยุคใหม่ และการบริหารจัดการหลักสูตรเพื่อสร้างบุคลากรทางการศึกษา",
+                careers: "ครูประจำการ, อาจารย์, นักวิชาการศึกษา, ติวเตอร์อิสระ",
+                facultyName: "คณะครุศาสตร์ / ศึกษาศาสตร์"
+            },
+            "ทั่วไป": {
+                desc: "ศึกษาข้อมูลวิชาเฉพาะทางตามหลักสูตร มุ่งเน้นสร้างความเชี่ยวชาญ ทักษะเชิงปฏิบัติ และองค์ความรู้ตามมาตรฐานวิชาชีพ",
+                careers: "ผู้เชี่ยวชาญประจำสายงาน, ที่ปรึกษา, นักวิชาการ",
+                facultyName: "คณะวิชาเฉพาะทาง / สหวิทยาการ"
+            }
+        };
+
+        function getDetailedInfo(courseName) {
+            if (courseName.includes("วิศวกรรม")) return facultyDetails["วิศวกรรม"];
+            if (courseName.includes("แพทย์") || courseName.includes("เภสัช") || courseName.includes("พยาบาล") || courseName.includes("สาธารณสุข")) return facultyDetails["แพทย์"];
+            if (courseName.includes("วิทยาศาสตร์") || courseName.includes("คอมพิวเตอร์") || courseName.includes("เคมี") || courseName.includes("ฟิสิกส์") || courseName.includes("คณิตศาสตร์")) return facultyDetails["วิทยา"];
+            if (courseName.includes("บริหาร") || courseName.includes("บัญชี") || courseName.includes("ตลาด") || courseName.includes("เงิน") || courseName.includes("ท่องเที่ยว")) return facultyDetails["บริหาร"];
+            if (courseName.includes("นิเทศ") || courseName.includes("วารสาร") || courseName.includes("สื่อ") || courseName.includes("ภาพยนตร์") || courseName.includes("โฆษณา")) return facultyDetails["นิเทศ"];
+            if (courseName.includes("ภาษา") || courseName.includes("อักษร") || courseName.includes("ศิลปศาสตร์") || courseName.includes("มนุษยศาสตร์")) return facultyDetails["ภาษา"];
+            if (courseName.includes("นิติ") || courseName.includes("รัฐศาสตร์") || courseName.includes("สังคม") || courseName.includes("จิตวิทยา") || courseName.includes("ประวัติศาสตร์")) return facultyDetails["สังคม"];
+            if (courseName.includes("สถาปัตกรรม") || courseName.includes("ออกแบบ")) return facultyDetails["สถาปัตย์"];
+            if (courseName.includes("ครุศาสตร์") || courseName.includes("ศึกษาศาสตร์") || courseName.includes("การสอน")) return facultyDetails["ครู"];
+            return facultyDetails["ทั่วไป"];
+        }
+
+        // --- 12.4 RENDERING CARDS FUNCTION ---
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        function renderResults(searchTerm = "") {
+            searchResults.innerHTML = "";
+            const filtered = fields.filter(item => item.toLowerCase().includes(searchTerm.toLowerCase()));
+            
+            if(filtered.length === 0) {
+                searchResults.innerHTML = `<p class="col-span-full text-center text-gray-500 py-8">ไม่พบสาขาวิชาที่คุณค้นหา ลองเปลี่ยนคำค้นหาใหม่ดูน้า</p>`;
+                return;
+            }
+
+            filtered.forEach(name => {
+                const card = document.createElement('div');
+                card.className = "p-5 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:-translate-y-1 transition duration-300 cursor-pointer";
+                card.setAttribute("onclick", `openModal('${name}')`);
+                card.innerHTML = `
+                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h4 class="font-bold text-base text-gray-800 dark:text-gray-100">${name}</h4>
+                    <p class="text-xs text-gray-500 mt-2">เปิดรับสมัคร: รอบ 1, 2, 3, 4</p>
+                    <span class="text-[11px] text-blue-500 font-medium block mt-1 hover:underline">ดูข้อมูลเพิ่มเติม <i class="fa-solid fa-arrow-right text-[9px] ml-0.5"></i></span>
+                `;
+                searchResults.appendChild(card);
+            });
+        }
+
+        // --- 12.5 MODAL SYSTEM CONTROL ---
+        function openModal(courseName) {
+            const modal = document.getElementById('course-modal');
+            const detail = getDetailedInfo(courseName);
+
+            document.getElementById('modal-title').innerText = courseName;
+            document.getElementById('modal-faculty').innerText = detail.facultyName;
+            document.getElementById('modal-desc').innerText = detail.desc;
+            document.getElementById('modal-careers').innerText = detail.careers;
+
+            if (courseName.includes("แพทย์") || courseName.includes("ทันตแพทย์") || courseName.includes("สัตวแพทย์")) {
+                document.getElementById('modal-duration').innerText = "6 ปีการศึกษา";
+            } else if (courseName.includes("สถาปัตยกรรม")) {
+                document.getElementById('modal-duration').innerText = "5 ปีการศึกษา";
+            } else {
+                document.getElementById('modal-duration').innerText = "4 ปีการศึกษา";
+            }
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.firstElementChild.classList.remove('scale-95');
+                modal.firstElementChild.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('course-modal');
+            modal.firstElementChild.classList.remove('scale-100');
+            modal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('course-modal');
+            if (event.target == modal) { closeModal(); }
+        }
+
+        // --- 12.6 OTHER SYSTEMS ---
+        function runAiAdvisor() {
+            const subject = document.getElementById('ai-subject').value;
+            const resultBox = document.getElementById('ai-result');
+            const suggestionText = document.getElementById('ai-suggestion-text');
+            const adviceDetails = document.getElementById('ai-advice-details');
+
+            if (subject === 'math') {
+                suggestionText.innerText = "คณะวิศวกรรมคอมพิวเตอร์ / Data Science";
+                adviceDetails.innerText = "เหมาะกับวิศวกรรมและสายงานคำนวณสถิติ ตลาดกำลังเติบโตสูงมาก!";
+            } else if (subject === 'science') {
+                suggestionText.innerText = "คณะแพทยศาสตร์ / วิทยาศาสตร์สุขภาพ";
+                adviceDetails.innerText = "เหมาะสมกับสายงานสาธารณสุขและเทคโนโลยีชีวภาพ";
+            } else {
+                suggestionText.innerText = "คณะนิเทศศาสตร์ / ศิลปศาสตร์ / กฎหมาย";
+                adviceDetails.innerText = "มุ่งเน้นการสื่อสาร ความคิดสร้างสรรค์ และการบริหารโครงสร้างสังคม";
+            }
+            resultBox.classList.remove('hidden');
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function calculateTcas() {
+            const tgat = parseFloat(document.getElementById('calc-tgat').value) || 0;
+            const tpat = parseFloat(document.getElementById('calc-tpat').value) || 0;
+            const alevel = parseFloat(document.getElementById('calc-alevel').value) || 0;
+            const total = (tgat * 0.3) + (tpat * 0.3) + (alevel * 0.4);
+            document.getElementById('calc-result').innerText = total.toFixed(2);
+            document.getElementById('calc-status').innerText = "คำนวณคะแนนรวมดิบเรียบร้อยแล้ว!";
+        }
+
+        function toggleFaq(id) {
+            const ans = document.getElementById(`faq-ans-${id}`);
+            if (ans.classList.contains('hidden')) { ans.classList.remove('hidden'); } 
+            else { ans.classList.add('hidden'); }
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            alert('🎉 ส่งข้อความเรียบร้อยแล้วครับ!');
+            document.getElementById('contact-form').reset();
+        }
+
+        // Run on start
+        searchInput.addEventListener('input', (e) => renderResults(e.target.value));
+        renderResults();
+    </script>
+</body>
+</html>
