@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCAS Hub - ระบบแนะแนวและเตรียมตัวเข้ามหาวิทยาลัย</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Anuphan', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Custom Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">TCAS Hub</span>
+                </div>
+                <div class="hidden md:flex space-x-4 text-sm font-medium">
+                    <a href="#hero" class="hover:text-blue-600 px-3 py-2 transition">หน้าแรก</a>
+                    <a href="#search" class="hover:text-blue-600 px-3 py-2 transition">ค้นหาคณะ</a>
+                    <a href="#ai-advisor" class="hover:text-blue-600 px-3 py-2 transition">AI แนะแนว</a>
+                    <a href="#tcas-calc" class="hover:text-blue-600 px-3 py-2 transition">คำนวณคะแนน</a>
+                    <a href="#compare" class="hover:text-blue-600 px-3 py-2 transition">เปรียบเทียบ</a>
+                    <a href="#timeline" class="hover:text-blue-600 px-3 py-2 transition">Timeline</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition">
+                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                    <a href="#contact" class="hidden sm:inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-xl font-medium transition">ติดต่อเรา</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header id="hero" class="relative overflow-hidden min-h-[85vh] flex items-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6 text-center md:text-left">
+                <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">TCAS Preparation Platform</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                    ค้นหาคณะที่ใช่ <br>
+                    <span class="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">อนาคตที่เลือกได้เอง</span>
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400 text-base sm:text-lg max-w-lg mx-auto md:mx-0">
+                    รวบรวมข้อมูลคณะ สาขา มหาวิทยาลัย ระบบคำนวณคะแนน และ AI ช่วยแนะแนวการศึกษาไว้ในที่เดียว เพื่อก้าวแรกสู่มหาวิทยาลัยอย่างมั่นใจ
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#ai-advisor" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-xl shadow-lg shadow-blue-600/20 transform hover:-translate-y-0.5 transition text-center">ลองใช้ AI แนะแนวด่วน</a>
+                    <a href="#search" class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium px-6 py-3 rounded-xl transition text-center">ค้นหาคณะ/สาขา</a>
+                </div>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-400 to-indigo-400 rounded-full filter blur-3xl opacity-20 dark:opacity-30 -z-10 animate-pulse"></div>
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600" alt="Students studying together" class="rounded-3xl shadow-2xl border-4 border-white dark:border-gray-800 object-cover max-h-[450px] w-full max-w-[450px]">
+            </div>
+        </div>
+    </header>
+
+    <section id="search" class="py-20 bg-white dark:bg-gray-800/50 transition">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <h2 class="text-3xl font-bold">ระบบค้นหาคณะและสาขาวิชา</h2>
+                <p class="text-gray-600 dark:text-gray-400">ค้นหาหลักสูตรปริญญาตรีครอบคลุมมากกว่า 80 สาขาวิชาทั่วประเทศไทย แบบเรียลไทม์</p>
+                <div class="relative max-w-xl mx-auto mt-6">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-400"></i>
+                    <input type="text" id="search-input" placeholder="พิมพ์ชื่อคณะ, สาขา, หรือคำสำคัญ เช่น วิศวะ, หมอ, บริหาร..." class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition shadow-inner">
+                </div>
+            </div>
+            
+            <div id="search-results" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                </div>
+        </div>
+    </section>
+
+    <section id="ai-advisor" class="py-20 bg-gray-50 dark:bg-gray-900 transition">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 space-y-4">
+                <span class="text-blue-600 dark:text-blue-400 font-bold text-sm bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full"><i class="fa-solid fa-robot mr-1"></i> AI Simulation Advisor</span>
+                <h2 class="text-3xl font-bold">ระบบ AI แนะแนวคณะอัจฉริยะ</h2>
+                <p class="text-gray-600 dark:text-gray-400">ทำแบบประเมินความสนใจเบื้องต้น เพื่อให้ AI ช่วยวิเคราะห์คณะที่เหมาะสมกับตัวคุณ</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-6 sm:p-10 shadow-xl border border-gray-100 dark:border-gray-700">
+                <form id="ai-form" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">1. วิชาที่คุณชอบหรือถนัดที่สุด?</label>
+                        <select id="ai-subject" class="w-full p-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="math">คณิตศาสตร์ / คำนวณ / ตรรกะ</option>
+                            <option value="science">วิทยาศาสตร์ / ฟิสิกส์ / เคมี / ชีวะ</option>
+                            <option value="art">ศิลปะ / ออกแบบ / ความคิดสร้างสรรค์</option>
+                            <option value="language">ภาษาไทย / ภาษาต่างประเทศ / การสื่อสาร</option>
+                            <option value="social">สังคมศึกษา / กฎหมาย / ประวัติศาสตร์</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">2. กิจกรรมหรือไลฟ์สไตล์ที่ตรงกับตัวคุณ?</label>
+                        <select id="ai-lifestyle" class="w-full p-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="tech">ชอบอยู่กับคอมพิวเตอร์ เทคโนโลยี แกดเจ็ตใหม่ๆ</option>
+                            <option value="people">ชอบช่วยเหลือคน พูดคุย ทำงานเป็นทีม บริการ</option>
+                            <option value="lab">ชอบทดลอง ค้นหาความจริง ทำงานในห้องแล็บหรือออฟฟิศเงียบๆ</option>
+                            <option value="business">ชอบวางแผน ซื้อขาย เจรจา ทำธุรกิจส่วนตัว</option>
+                            <option value="creative">ชอบงานอิสระ คิดนอกกรอบ วาดรูป ถ่ายภาพ แต่งเพลง</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="runAiAdvisor()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold p-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-brain"></i> เริ่มวิเคราะห์ผลลัพธ์
+                    </button>
+                </form>
+
+                <div id="ai-result" class="hidden mt-8 p-6 bg-indigo-50 dark:bg-indigo-950/40 rounded-2xl border border-indigo-100 dark:border-indigo-900/50 space-y-4">
+                    <h3 class="text-xl font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> คณะที่ AI แนะนำสำหรับคุณ:
+                    </h3>
+                    <p id="ai-suggestion-text" class="text-lg font-medium text-gray-800 dark:text-gray-200"></p>
+                    <div class="text-sm text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 p-4 rounded-xl border border-indigo-100 dark:border-gray-700">
+                        <strong>คำแนะนำเพิ่มเติมจาก AI:</strong> <span id="ai-advice-details"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tcas-calc" class="py-20 bg-white dark:bg-gray-800/50 transition">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 space-y-4">
+                <h2 class="text-3xl font-bold">เครื่องคำนวณคะแนน TCAS เบื้องต้น</h2>
+                <p class="text-gray-600 dark:text-gray-400">กรอกคะแนนจำลองของคุณเพื่อคำนวณสัดส่วนคะแนนรวมดิบ (เต็ม 100%)</p>
+            </div>
+
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-3xl p-6 sm:p-8 border border-gray-200 dark:border-gray-700 grid md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h3 class="font-bold text-lg border-b pb-2 dark:border-gray-700">กรอกคะแนน (คะแนนเต็ม 100)</h3>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">TGAT (ความถนัดทั่วไป)</label>
+                        <input type="number" id="calc-tgat" max="100" min="0" placeholder="เช่น 75" class="w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">TPAT (ความถนัดวิชาชีพ)</label>
+                        <input type="number" id="calc-tpat" max="100" min="0" placeholder="เช่น 60" class="w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">A-Level (วิชาสามัญเฉลี่ย)</label>
+                        <input type="number" id="calc-alevel" max="100" min="0" placeholder="เช่น 55" class="w-full p-2.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                    </div>
+                    <button onclick="calculateTcas()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium p-3 rounded-xl transition">คำนวณคะแนนรวม</button>
+                </div>
+
+                <div class="flex flex-col justify-center items-center bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 text-center">
+                    <h3 class="text-sm text-gray-500 uppercase font-semibold mb-2">คะแนนเฉลี่ยรวมของคุณ</h3>
+                    <div class="text-5xl font-black text-blue-600 dark:text-blue-400 mb-2"><span id="calc-result">0.00</span>%</div>
+                    <p id="calc-status" class="text-sm text-gray-600 dark:text-gray-400">กรอกคะแนนแล้วกดคำนวณเพื่อประเมินโอกาส</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compare" class="py-20 bg-gray-50 dark:bg-gray-900 transition">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 space-y-4">
+                <h2 class="text-3xl font-bold">เปรียบเทียบข้อมูลมหาวิทยาลัย</h2>
+                <p class="text-gray-600 dark:text-gray-400">เปรียบเทียบจุดเด่นและอัตราค่าเทอมของมหาวิทยาลัยยอดนิยมในไทย</p>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl bg-white dark:bg-gray-800">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 dark:bg-gray-700 text-xs sm:text-sm uppercase font-bold text-gray-700 dark:text-gray-300">
+                            <th class="p-4">มหาวิทยาลัย</th>
+                            <th class="p-4">จุดเด่น / ชื่อเสียง</th>
+                            <th class="p-4">ค่าเทอมเฉลี่ย (บาท)</th>
+                            <th class="p-4">สิ่งอำนวยความสะดวก</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700 text-sm">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                            <td class="p-4 font-bold text-blue-600 dark:text-blue-400">จุฬาลงกรณ์มหาวิทยาลัย</td>
+                            <td class="p-4">วิชาการเข้มข้น, คอนเนคชันศิษย์เก่าแน่น, ใจกลางเมือง</td>
+                            <td class="p-4">17,000 - 25,000 / เทอม</td>
+                            <td class="p-4">ห้องสมุดขนาดใหญ่, รถปอ.พ้นม., ศูนย์กีฬาครบวงจร</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                            <td class="p-4 font-bold text-yellow-600 dark:text-yellow-400">มหาวิทยาลัยธรรมศาสตร์</td>
+                            <td class="p-4">เด่นด้านกฎหมาย การเมือง สังคมศาสตร์ และบัญชี</td>
+                            <td class="p-4">15,000 - 21,500 / เทอม</td>
+                            <td class="p-4">โรงพยาบาล มธ., หอพักนศ.ขนาดใหญ่, เรียนอิสระ</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                            <td class="p-4 font-bold text-green-600 dark:text-green-400">มหาวิทยาลัยเกษตรศาสตร์</td>
+                            <td class="p-4">วิศวกรรมศาสตร์, เกษตร, วิทยาศาสตร์, บริหารธุรกิจ</td>
+                            <td class="p-4 text-sm">12,000 - 28,000 / เทอม</td>
+                            <td class="p-4">พื้นที่สีเขียวกว้างขวาง, จักรยานนนทรี, แล็บวิจัยทันสมัย</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                            <td class="p-4 font-bold text-purple-600 dark:text-purple-400">มหาวิทยาลัยมหิดล</td>
+                            <td class="p-4">การแพทย์, วิทยาศาสตร์สุขภาพ, ดุริยางคศิลป์</td>
+                            <td class="p-4">20,000 - 35,000 / เทอม</td>
+                            <td class="p-4">วิทยาเขตศาลายาสวยงาม, โรงพยาบาลเครือข่าย, ศูนย์วิจัยชั้นนำ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white dark:bg-gray-800/50 transition">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-12">
+            
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold flex items-center gap-2"><i class="fa-solid fa-map-location-dot text-blue-500"></i> พิกัดมหาวิทยาลัยในไทย</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">แผนที่ตัวอย่างแสดงตำแหน่งและบรรยากาศมหาวิทยาลัยในกรุงเทพฯ และปริมณฑล</p>
+                <div class="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-md h-64">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.4678887961237!2d100.52845017592305!3d13.73850949733076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29ed34c99a077%3A0x13c7270e9a562085!2zSlVMQUxPTkdLT1JOIFVOSVZFUlNJVFk!5e0!3m2!1sen!2sth!4v1700000000000!5m2!1sen!2sth" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-indigo-500"></i> ทุนการศึกษาอัปเดต</h3>
+                <div class="space-y-3">
+                    <div class="p-4 bg-gray-50 dark:bg-gray-800 border-l-4 border-indigo-500 rounded-r-xl">
+                        <h4 class="font-bold text-sm">ทุนเรียนดีเฉลิมพระเกียรติ ม.ดัง</h4>
+                        <p class="text-xs text-gray-500 mt-1">สนับสนุนค่าเล่าเรียน 100% ตลอด 4 ปีการศึกษา</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-800 border-l-4 border-indigo-500 rounded-r-xl">
+                        <h4 class="font-bold text-sm">ทุนเยาวชนคนเก่งด้านเทคโนโลยี</h4>
+                        <p class="text-xs text-gray-500 mt-1">ทุนสนับสนุนจากบิ๊กเทคชั้นนำ พร้อมโน้ตบุ๊กฟรี</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-800 border-l-4 border-indigo-500 rounded-r-xl">
+                        <h4 class="font-bold text-sm">ทุน กยศ. (กองทุนกู้ยืมเพื่อการศึกษา)</h4>
+                        <p class="text-xs text-gray-500 mt-1">เปิดรับสมัครผู้กู้รายใหม่ปีการศึกษาประจำปีนี้แล้ว</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold flex items-center gap-2"><i class="fa-solid fa-newspaper text-emerald-500"></i> ข่าวการศึกษา TCAS</h3>
+                <div class="space-y-3">
+                    <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-md transition">
+                        <span class="text-[10px] uppercase font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-full">ด่วนที่สุด</span>
+                        <h4 class="font-bold text-sm mt-1">ทปอ. ประกาศปรับเกณฑ์การสอบ TGAT รูปแบบใหม่ปีนี้</h4>
+                    </div>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-md transition">
+                        <span class="text-[10px] uppercase font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-full">ข่าวทั่วไป</span>
+                        <h4 class="font-bold text-sm mt-1">เจาะลึก 10 คณะยอดฮิตที่มีผู้สมัครสูงสุดในรอบ Portfolio</h4>
+                    </div>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-md transition">
+                        <span class="text-[10px] uppercase font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-full">เคล็ดลับ</span>
+                        <h4 class="font-bold text-sm mt-1">รวมสรุปสูตรฟิสิกส์เคมี ออกสอบแน่นอนในแนว A-Level</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="timeline" class="py-20 bg-gray-50 dark:bg-gray-900 transition">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 space-y-4">
+                <h2 class="text-3xl font-bold">Timeline การเตรียมตัวสอบ TCAS</h2>
+                <p class="text-gray-600 dark:text-gray-400">วางแผนชีวิตเด็ก ม.6 ให้พร้อมในแต่ละรอบการคัดเลือก</p>
+            </div>
+
+            <div class="relative border-l-2 border-blue-200 dark:border-gray-700 ml-4 md:ml-32 space-y-12">
+                
+                <div class="relative">
+                    <div class="absolute -left-[9px] top-1.5 bg-blue-600 w-4 h-4 rounded-full border-4 border-white dark:border-gray-900"></div>
+                    <div class="md:absolute md:-left-32 md:w-24 text-sm font-bold text-blue-600 dark:text-blue-400 text-left md:text-right pt-0.5">มิ.ย. - ต.ค.</div>
+                    <div class="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 ml-6">
+                        <h3 class="font-bold text-base">รอบที่ 1: Portfolio (แฟ้มสะสมผลงาน)</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">รวบรวมเกียรติบัตร ผลงาน ผลการเรียน 5 เทอม และจัดทำรูปเล่มเสนอคณะที่สนใจ เน้นกิจกรรมเด่น</p>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute -left-[9px] top-1.5 bg-indigo-600 w-4 h-4 rounded-full border-4 border-white dark:border-gray-900"></div>
+                    <div class="md:absolute md:-left-32 md:w-24 text-sm font-bold text-indigo-600 dark:text-indigo-400 text-left md:text-right pt-0.5">พ.ย. - ธ.ค.</div>
+                    <div class="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 ml-6">
+                        <h3 class="font-bold text-base">สอบ TGAT / TPAT</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">ลงสนามสอบวัดความถนัดทั่วไป และความถนัดทางวิชาชีพ คะแนนส่วนนี้สำคัญมากในการยื่นรอบ 2 และรอบ 3</p>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute -left-[9px] top-1.5 bg-yellow-500 w-4 h-4 rounded-full border-4 border-white dark:border-gray-900"></div>
+                    <div class="md:absolute md:-left-32 md:w-24 text-sm font-bold text-yellow-500 text-left md:text-right pt-0.5">ก.พ. - มี.ค.</div>
+                    <div class="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 ml-6">
+                        <h3 class="font-bold text-base">รอบที่ 2 & 3: Quota และ Admission</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">สอบ A-Level (วิชาสามัญ) นำคะแนนมายื่นประมวลผล เลือกอันดับคณะทั่วประเทศผ่านระบบกลางของ ทปอ.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white dark:bg-gray-800/50 transition">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 space-y-4">
+                <h2 class="text-3xl font-bold">คำถามที่พบบ่อย (FAQ)</h2>
+                <p class="text-gray-600 dark:text-gray-400">ไขข้อข้องใจไขทุกปัญหาคาใจเกี่ยวกับระบบ TCAS</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm">
+                    <button onclick="toggleFaq(1)" class="w-full text-left p-5 font-semibold flex justify-between items-center bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 transition focus:outline-none">
+                        <span>ระบบ TCAS คืออะไร มีทั้งหมดกี่รอบ?</span>
+                        <i id="faq-icon-1" class="fa-solid fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div id="faq-ans-1" class="hidden p-5 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                        TCAS ย่อมาจาก Thai University Central Admission System เป็นระบบการคัดเลือกบุคคลเข้าศึกษาต่อในระดับมหาวิทยาลัย มีทั้งหมด 4 รอบหลัก ได้แก่ รอบที่ 1 Portfolio, รอบที่ 2 Quota, รอบที่ 3 Admission และรอบที่ 4 Direct Admission
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm">
+                    <button onclick="toggleFaq(2)" class="w-full text-left p-5 font-semibold flex justify-between items-center bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 transition focus:outline-none">
+                        <span>หากติดรอบที่ 1 แล้ว สามารถสละสิทธิ์ไปสอบรอบที่ 3 ได้ไหม?</span>
+                        <i id="faq-icon-2" class="fa-solid fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div id="faq-ans-2" class="hidden p-5 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                        ทำได้ครับ โดยน้องๆ จะต้องเข้าไปทำรายการ "สละสิทธิ์" (Waiver) ในระบบ myTCAS ตามช่วงเวลาที่ ทปอ. กำหนดไว้ จึงจะสามารถไปสมัครและกดยืนยันสิทธิ์ในรอบต่อไปได้
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900 transition">
+        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 space-y-6">
+                <div class="text-center space-y-2">
+                    <h2 class="text-2xl font-bold">กล่องข้อความติดต่อทีมงาน</h2>
+                    <p class="text-sm text-gray-500">มีข้อเสนอแนะหรือปัญหาระบบ แอดมินพร้อมตอบกลับภายใน 24 ชม.</p>
+                </div>
+
+                <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">ชื่อ-นามสกุล</label>
+                        <input type="text" required class="w-full p-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="สมชาย ใจดี">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">อีเมลติดต่อ</label>
+                        <input type="email" required class="w-full p-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="somchai@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">ข้อความของคุณ</label>
+                        <textarea required rows="4" class="w-full p-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="พิมพ์ข้อความที่นี่..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold p-3.5 rounded-xl transition shadow-md">ส่งข้อความ</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white dark:bg-gray-950 text-gray-500 text-center py-8 text-sm border-t border-gray-200 dark:border-gray-800 transition">
+        <p>&copy; 2026 TCAS Hub Project. พัฒนาด้วย HTML5, CSS3 และ Vanilla JS</p>
+        <p class="text-xs text-gray-400 mt-2">จัดทำขึ้นเพื่อการศึกษาและการส่งงานวิชาพัฒนาเว็บไซต์ระดับมืออาชีพ</p>
+    </footer>
+
+    <script>
+        // --- 12.1 DARK MODE SYSTEM ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // ตรวจสอบ Theme เดิมจาก LocalStorage หรือ OS Preference
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.className = 'fa-solid fa-sun text-lg text-yellow-400';
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.className = 'fa-solid fa-moon text-lg';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon text-lg';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun text-lg text-yellow-400';
+            }
+        });
+
+        // --- 12.2 MOCK DATA: 80+ คณะสาขาวิชาจำลอง ---
+        const fields = [
+            "วิศวกรรมคอมพิวเตอร์", "วิศวกรรมไฟฟ้า", "วิศวกรรมโยธา", "วิศวกรรมเครื่องกล", "วิศวกรรมเคมี", "วิศวกรรมอุตสาหการ", "วิศวกรรมการบิน", "วิศวกรรมสิ่งแวดล้อม",
+            "แพทยศาสตร์", "ทันตแพทยศาสตร์", "เภสัชศาสตร์", "สัตวแพทยศาสตร์", "พยาบาลศาสตร์", "เทคนิคการแพทย์", "สาธารณสุขศาสตร์", "กายภาพบำบัด",
+            "วิทยาการคอมพิวเตอร์", "เทคโนโลยีสารสนเทศ", "วิทยาศาสตร์ข้อมูล", "เคมี", "ฟิสิกส์", "ชีววิทยา", "คณิตศาสตร์", "สถิติ",
+            "บริหารธุรกิจ", "การบัญชี", "การตลาด", "การเงิน", "การจัดการโลจิสติกส์", "ธุรกิจระหว่างประเทศ", "การท่องเที่ยวและการโรงแรม", "ผู้ประกอบการ",
+            "นิติศาสตร์", "รัฐศาสตร์", "ความสัมพันธ์ระหว่างประเทศ", "สังคมวิทยา", "จิตวิทยา", "ประวัติศาสตร์", "ปรัชญา", "ภูมิศาสตร์",
+            "นิเทศศาสตร์", "วารสารศาสตร์", "การประชาสัมพันธ์", "ภาพยนตร์และสื่อดิจิทัล", "การสร้างสรรค์คอนเทนต์", "โฆษณา", "มัลติมีเดีย", "วิทยุกระจายเสียง",
+            "อักษรศาสตร์", "ศิลปศาสตร์", "มนุษยศาสตร์", "ภาษาอังกฤษ", "ภาษาจีน", "ภาษาญี่ปุ่น", "ภาษาเกาหลี", "ภาษาฝรั่งเศส",
+            "สถาปัตยกรรมศาสตร์", "การออกแบบภายใน", "ภูมิสถาปัตยกรรม", "ผังเมือง", "การออกแบบอุตสาหกรรม", "ศิลปะประยุกต์", "นวัตกรรมการออกแบบ", "สถาปัตยกรรมไทย",
+            "ครุศาสตร์", "ศึกษาศาสตร์", "การประถมศึกษา", "การศึกษาปฐมวัย", "พลศึกษา", "จิตวิทยาการแนะแนว", "เทคโนโลยีการศึกษา", "การสอนภาษาอังกฤษ",
+            "เศรษฐศาสตร์", "เศรษฐศาสตร์ระหว่างประเทศ", "เศรษฐศาสตร์การเงิน", "เกษตรศาสตร์", "สัตวบาล", "วิทยาศาสตร์การอาหาร", "วนศาสตร์", "ประมง"
+        ];
+
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        function renderResults(searchTerm = "") {
+            searchResults.innerHTML = "";
+            const filtered = fields.filter(item => item.toLowerCase().includes(searchTerm.toLowerCase()));
+            
+            if(filtered.length === 0) {
+                searchResults.innerHTML = `<p class="col-span-full text-center text-gray-500 py-8">ไม่พบสาขาวิชาที่คุณค้นหา ลองเปลี่ยนคำค้นหาใหม่ดูน้า</p>`;
+                return;
+            }
+
+            filtered.forEach(name => {
+                const card = document.createElement('div');
+                card.className = "p-5 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:-translate-y-1 transition duration-300 cursor-pointer";
+                card.innerHTML = `
+                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h4 class="font-bold text-base text-gray-800 dark:text-gray-100">${name}</h4>
+                    <p class="text-xs text-gray-500 mt-2">เปิดรับสมัคร: รอบ 1, 2, 3, 4</p>
+                `;
+                searchResults.appendChild(card);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => renderResults(e.target.value));
+        renderResults(); // โหลดครั้งแรกตอนเปิดหน้าเว็บ
+
+        // --- 12.3 AI ADVISOR SIMULATION ---
+        function runAiAdvisor() {
+            const subject = document.getElementById('ai-subject').value;
+            const lifestyle = document.getElementById('ai-lifestyle').value;
+            const resultBox = document.getElementById('ai-result');
+            const suggestionText = document.getElementById('ai-suggestion-text');
+            const adviceDetails = document.getElementById('ai-advice-details');
+
+            let suggestion = "";
+            let details = "";
+
+            if (subject === 'math' && lifestyle === 'tech') {
+                suggestion = "คณะวิศวกรรมคอมพิวเตอร์ / วิทยาการคอมพิวเตอร์ / Data Science";
+                details = "คุณชอบตรรกะและเทคโนโลยี สาขานี้จะพาคุณไปเจาะลึกการเขียนโปรแกรม ปัญญาประดิษฐ์ และระบบเครือข่าย ซึ่งตลาดกำลังต้องการสูงมากๆ!";
+            } else if (subject === 'science' && lifestyle === 'lab') {
+                suggestion = "คณะแพทยศาสตร์ / เภสัชศาสตร์ / วิทยาศาสตร์การแพทย์";
+                details = "ความถนัดในวิทยาศาสตร์และการวิเคราะห์ในห้องปฏิบัติการ เหมาะสมอย่างยิ่งกับสายงานสุขภาพและการค้นคว้าเพื่อช่วยเหลือผู้อื่น";
+            } else if (subject === 'art' && lifestyle === 'creative') {
+                suggestion = "คณะสถาปัตยกรรมศาสตร์ / คณะดิจิทัลอาร์ต / นิเทศศิลป์";
+                details = "การผสานความคิดสร้างสรรค์เข้ากับทักษะศิลปะ เหมาะกับการทำงานสายออกแบบ ครีเอทีฟ ดีไซเนอร์ หรือผู้ผลิตสื่อยุคใหม่";
+            } else if (subject === 'language' && lifestyle === 'people') {
+                suggestion = "คณะอักษรศาสตร์ / มนุษยศาสตร์ / คณะนิเทศศาสตร์";
+                details = "การสื่อสารและภาษาบวกกับใจที่รักบริการและปฏิสัมพันธ์กับผู้คน จะช่วยให้คุณโดดเด่นในสายงานคอนเทนต์ครีเอเตอร์ ล่าม หรือพีอาร์ระดับสากล";
+            } else if (subject === 'math' && lifestyle === 'business') {
+                suggestion = "คณะพาณิชยศาสตร์และการบัญชี / เศรษฐศาสตร์ / บริหารธุรกิจ";
+                details = "คุณคิดเป็นระบบและมองเห็นโอกาสทางธุรกิจ คณะนี้จะสอนเรื่องการเงิน การวิเคราะห์การตลาด และการวางกลยุทธ์สร้างเม็ดเงิน";
+            } else {
+                suggestion = "คณะรัฐศาสตร์ / นิติศาสตร์ / สังคมศาสตร์";
+                details = "คุณสนใจความรู้รอบตัวและโครงสร้างสังคม ลองเน้นศึกษาเรื่องกฎหมาย การบริหารงานบุคคล หรือการช่วยเหลือและพัฒนาชุมชนดูนะครับ";
+            }
+
+            suggestionText.innerText = suggestion;
+            adviceDetails.innerText = details;
+            resultBox.classList.remove('hidden');
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- 12.4 TCAS CALCULATION ---
+        function calculateTcas() {
+            const tgat = parseFloat(document.getElementById('calc-tgat').value) || 0;
+            const tpat = parseFloat(document.getElementById('calc-tpat').value) || 0;
+            const alevel = parseFloat(document.getElementById('calc-alevel').value) || 0;
+            
+            // สูตรคำนวณสัดส่วนคะแนนจำลอง (แบบสมมุติฐานเฉลี่ย)
+            const total = (tgat * 0.3) + (tpat * 0.3) + (alevel * 0.4);
+            
+            document.getElementById('calc-result').innerText = total.toFixed(2);
+            const status = document.getElementById('calc-status');
+
+            if (total >= 70) {
+                status.innerText = "🎉 ยอดเยี่ยมมาก! คะแนนอยู่ในเกณฑ์สูงมาก มีโอกาสติดคณะแข่งขันสูงมาก";
+                status.className = "text-sm text-green-600 font-medium";
+            } else if (total >= 50) {
+                status.innerText = "👍 เกณฑ์ปานกลาง มีโอกาสลุ้นคณะยอดนิยมในระดับกลางถึงสูง พยายามเพิ่มความแม่นยำอีกนิด";
+                status.className = "text-sm text-yellow-600 font-medium";
+            } else {
+                status.innerText = "📖 คะแนนสะสมยังค่อนข้างน้อย แนะนำให้เร่งทบทวนจุดที่ผิดพลาดเพื่ออัปคะแนนในรอบต่อไป";
+                status.className = "text-sm text-red-500 font-medium";
+            }
+        }
+
+        // --- 12.5 FAQ ACCORDION LOGIC ---
+        function toggleFaq(id) {
+            const ans = document.getElementById(`faq-ans-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                ans.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // --- 12.6 CONTACT FORM ACTION ---
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            alert('🎉 ระบบได้รับข้อความของคุณเรียบร้อยแล้ว ทีมงานจะรีบติดต่อกลับไปอย่างเร็วที่สุดครับ!');
+            document.getElementById('contact-form').reset();
+        }
+    </script>
+</body>
+</html>
